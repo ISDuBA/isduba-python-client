@@ -1,14 +1,22 @@
+# SPDX-FileCopyrightText: 2025 Intevation GmbH
+#
+# SPDX-License-Identifier: Apache-2.0
+
 import pytest
 import os
+import tomllib
+import httpx
 from isduba import Client
 from isduba.api.default import get_about, get_documents
 from isduba.models import WebAboutInfo
 from isduba.types import Response as ISDuBAResponse
 
-# Configuration (ToDo: Make configurable)
-BASE_URL = "http://localhost:5173"
-TEST_USERNAME = "test-user"
-TEST_PASSWORD = "test-user"
+with open("tests/config.toml", "rb") as f:
+    config = tomllib.load(f)
+
+BASE_URL = config["server"]["base_url"]
+TEST_USERNAME = config["credentials"]["username"]
+TEST_PASSWORD = config["credentials"]["password"]
 
 @pytest.fixture
 def client():

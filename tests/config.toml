@@ -1,0 +1,6 @@
+[server]
+base_url = "http://localhost:5173"
+
+[credentials]
+username = "test-user"
+password = "test-user"
